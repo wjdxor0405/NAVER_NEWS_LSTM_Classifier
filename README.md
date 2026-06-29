@@ -1,14 +1,3 @@
-# 네이버 뉴스 LSTM 기사 분류 프로젝트
-
-BBC RNN Classifier를 기반으로, **네이버 뉴스 한국어 기사 제목**을 세 가지 카테고리로 분류하는 LSTM 모델 실습 프로젝트입니다.
-
-## 분류 카테고리
-
-| 라벨 | 네이버 섹션 | 섹션 ID |
-|------|-----------|---------|
-| `it` | IT/과학 | 105 |
-| `sports` | 스포츠 | 107 |
-| `entertainment` | 연예 | 106 |
 
 ## 프로젝트 구조
 
@@ -25,24 +14,6 @@ naver_rnn_project/
 │   └── predict.py           # 추론
 └── models/                  # 저장된 모델 파일
 ```
-
-## 데이터 수집 전략
-
-`app/data.py`는 **방법 1·2 하이브리드** 방식으로 동작합니다.
-
-### 방법 2 (우선): 네이버 뉴스 실시간 크롤링
-```python
-from app.data import get_news_it, get_news_sports, get_news_entertainment
-
-it_data    = get_news_it()            # [(제목, "it"), ...]
-sports_data = get_news_sports()       # [(제목, "sports"), ...]
-ent_data   = get_news_entertainment() # [(제목, "entertainment"), ...]
-```
-- 접근 URL: `https://news.naver.com/section/{105|107|106}`
-- 네트워크 오류·파싱 실패 시 방법 1로 자동 폴백
-
-### 방법 1 (폴백): 내장 샘플 데이터
-각 카테고리별 15건의 실제 뉴스 제목 형식 샘플이 모듈에 내장되어 있습니다.
 
 ## 한국어 전처리 (`app/preprocess.py`)
 
@@ -65,18 +36,4 @@ pip install konlpy
 
 # 학습 및 예측
 python main.py
-```
-
-## 개별 함수 테스트
-
-```python
-from app.data import get_news_it, get_news_sports, get_news_entertainment, load_sample_data
-from app.preprocess import clean_text
-
-# 크롤링 테스트
-print(get_news_it()[:3])
-
-# 전처리 테스트
-print(clean_text("삼성전자, AI 반도체 칩 출시…글로벌 시장 공략"))
-# 출력 예: "삼성전자 반도체 출시 글로벌 시장 공략"
 ```
