@@ -1,0 +1,9 @@
+numpy>=1.26,<3
+scikit-learn>=1.4
+matplotlib>=3.8
+torch>=2.2
+notebook>=7.0
+ipykernel>=6.29
+requests>=2.31
+beautifulsoup4>=4.12
+konlpy>=0.6; platform_system != "Windows"   # 선택적: 형태소 분석 고도화 (Java 필요)
